@@ -51,7 +51,7 @@ def send_to_django(utm_pos, gps_pos, theta, rssi):
 
 def main():
     # Initializing ROS node.
-    rospy.init_node("telemetryolte")
+    rospy.init_node("drone_telemetry_over_network")
 
     # Create an object for the API.
     drone = gnc_api()
