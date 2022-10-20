@@ -74,6 +74,10 @@ if __name__ == '__main__':
             print("Connection Refused at server, retrying in 3 seconds...")
             rospy.sleep(3)
             continue
+        except ConnectionResetError:
+            print("Connection Reseted at server, retrying in 3 seconds...")
+            rospy.sleep(3)
+            continue           
         except BrokenPipeError:
             print("Broken Pipe, retying...")
             rospy.sleep(0.5)
