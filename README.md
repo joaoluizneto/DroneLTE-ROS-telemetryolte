@@ -1,5 +1,5 @@
 # drone_telemetry_over_network
-ROS telemetry node that sends telemetry data over the network to the a Cloud GCS.
+ROS telemetry node that sends telemetry data over the network to the a Cloud CCS.
 
 ## Installation of the package:
 

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # Import ROS.
 import rospy
-from gcsclient import GcsWebsocketClient
+from ccsclient import ccsWebsocketClient
 import companion, os, requests
 
 # Import the API.
@@ -18,7 +18,7 @@ def main():
     # Create an object for the API.
     drone = gnc_api()
 
-    gcscli = GcsWebsocketClient(
+    ccscli = ccsWebsocketClient(
         api_url="ws://{}:8000/ws/robot/zangado/".format(os.getenv(key='API_URL')), 
         #api_url="ws://192.168.0.12:8000/ws/robot/zangado/", 
         headers={'X-DroneApiKey':os.getenv(key='DRONE_API_KEY')},
@@ -64,7 +64,7 @@ def main():
 
                 }
         }
-        gcscli.send_telemetry(message)
+        ccscli.send_telemetry(message)
 
         rospy.loginfo(CGREEN2 + f"Dispatching telemetry info:\n state:{message['state']} \nposition:{message['position']['location']}" + CEND)
 
