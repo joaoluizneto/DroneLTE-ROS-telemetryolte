@@ -7,7 +7,7 @@ class GcsWebsocketClient:
 
     """
 
-    def __init__(self, api_url="ws://localhost:8000/ws/robot/zangado/", headers={'X-DroneApiKey':"hOgtypH7.eQM8nQbEUNyQY5gPUQg0IG1WbuopENfz"}):
+    def __init__(self, api_url="ws://192.168.0.12:8000/ws/robot/zangado/", headers={'X-DroneApiKey':"hOgtypH7.eQM8nQbEUNyQY5gPUQg0IG1WbuopENfz"}):
         #websocket.enableTrace(True)
         ws = websocket.WebSocket()
         ws.connect(api_url,
@@ -90,3 +90,7 @@ class GcsWebsocketReceiver:
 
     def on_open(self, ws):
         pass
+
+if __name__ == '__main__':
+    g = GcsWebsocketClient()
+    g.send_telemetry()

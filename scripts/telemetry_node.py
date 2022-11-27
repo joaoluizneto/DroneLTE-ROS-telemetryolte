@@ -2,7 +2,7 @@
 # Import ROS.
 import rospy
 from gcsclient import GcsWebsocketClient
-import companion
+import companion, os, requests
 
 # Import the API.
 from iq_gnc.py_gnc_functions import *
@@ -18,7 +18,12 @@ def main():
     # Create an object for the API.
     drone = gnc_api()
 
-    gcscli = GcsWebsocketClient(api_url="ws://localhost:8000/ws/robot/zangado/", headers={'X-DroneApiKey':"hOgtypH7.eQM8nQbEUNyQY5gPUQg0IG1WbuopENfz"})
+    gcscli = GcsWebsocketClient(
+        api_url="ws://{}:8000/ws/robot/zangado/".format(os.getenv(key='API_URL')), 
+        #api_url="ws://192.168.0.12:8000/ws/robot/zangado/", 
+        headers={'X-DroneApiKey':os.getenv(key='DRONE_API_KEY')},
+        #headers={'X-DroneApiKey':'hOgtypH7.eQM8nQbEUNyQY5gPUQg0IG1WbuopENfz'},
+        )
 
     # Wait for FCU connection.
     drone.wait4connect()
@@ -70,6 +75,9 @@ if __name__ == '__main__':
             main()
         except KeyboardInterrupt:
             print("Crtl-C getting out...")
+            rospy.sleep(3)
+            rospy.signal_shutdown("Crtl-C")
+            exit()
         except ConnectionRefusedError:
             print("Connection Refused at server, retrying in 3 seconds...")
             rospy.sleep(3)
@@ -82,4 +90,9 @@ if __name__ == '__main__':
             print("Broken Pipe, retying...")
             rospy.sleep(0.5)
             continue
+        except requests.exceptions.ConnectionError:
+            print("ConnectionError, retying...")
+            rospy.sleep(0.5)
+            continue
 
+            
