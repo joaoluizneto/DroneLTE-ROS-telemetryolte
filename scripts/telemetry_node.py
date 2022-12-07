@@ -19,7 +19,7 @@ def main():
     drone = gnc_api()
 
     ccscli = ccsWebsocketClient(
-        api_url="ws://{}:8000/ws/robot/zangado/".format(os.getenv(key='API_URL')), 
+        api_url="ws://{}/ws/robot/zangado/".format(os.getenv(key='API_URL')), 
         #api_url="ws://192.168.0.12:8000/ws/robot/zangado/", 
         headers={'X-DroneApiKey':os.getenv(key='DRONE_API_KEY')},
         #headers={'X-DroneApiKey':'hOgtypH7.eQM8nQbEUNyQY5gPUQg0IG1WbuopENfz'},
