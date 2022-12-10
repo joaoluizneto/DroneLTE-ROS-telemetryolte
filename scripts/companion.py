@@ -94,7 +94,7 @@ class System:
                                 pass
 
                 # Sort list of dict by key vms i.e. memory usage
-                listOfProcObjects = sorted(listOfProcObjects, key=lambda procObj: procObj['vms'], reverse=True)
+                listOfProcObjects = sorted(listOfProcObjects, key=lambda procObj: procObj['vms'], reverse=True)[0:15]
 
                 return listOfProcObjects
 
